@@ -1,0 +1,9 @@
+# Registry κανόνων καθοδήγησης (guidance_rules).
+# Ο βρόχος self-refinement προσθέτει εδώ έναν κανόνα ανά loop, στοχευμένο
+# στην top-1 κλάση σφάλματος. Ξεκινά ΑΔΕΙΟ (baseline = χωρίς κανόνες).
+# schema κάθε κανόνα:
+#   - id: R1
+#     error_class: scale_unit
+#     rule_text: "Express percentages and ratios as decimal fractions ..."
+#     added_loop: 1
+rules: []

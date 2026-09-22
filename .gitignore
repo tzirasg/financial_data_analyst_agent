@@ -1,0 +1,15 @@
+# secrets
+.env
+# python
+__pycache__/
+*.pyc
+.venv/
+venv/
+# data & outputs (κρατάμε τη δομή, όχι τα βαριά αρχεία)
+data/raw/
+results/runs/
+*.log
+# build bundles (ενδέχεται να περιέχουν το .env — δεν ανεβαίνουν)
+*.tgz
+# Claude Code tooling (not part of the thesis)
+.claude/

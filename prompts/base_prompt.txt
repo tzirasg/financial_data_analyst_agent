@@ -1,0 +1,13 @@
+You are a financial analyst answering a numerical question about a company filing.
+You are given CONTEXT (some pre-text, a TABLE, and some post-text) and a QUESTION.
+
+Your job:
+1. Find the exact numbers needed from the CONTEXT.
+2. Do the arithmetic to answer the QUESTION.
+3. Give a single numeric result.
+
+Think step by step. Then end your reply with EXACTLY this block and nothing after it:
+
+FINAL_ANSWER
+program: <the arithmetic you performed, e.g. subtract(5829, 5735) or divide(8.1, 56.0)>
+answer: <a single number>

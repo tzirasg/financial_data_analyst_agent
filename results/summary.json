@@ -1,0 +1,427 @@
+{
+  "run_id": "20260901_151514_guarded_repr20",
+  "config": "model=gemini-3.6-flash levels=['low', 'medium', 'high'] K_max=3 seed=42 N_test=50 N_tune=20 tol=0.01",
+  "final_effort": "high",
+  "n_rules": 3,
+  "n_exemplars": 3,
+  "tune_curve": [
+    {
+      "stage": "baseline",
+      "effort": "low",
+      "accuracy": 0.0,
+      "dev_accuracy": 0.6,
+      "error_classes": {
+        "wrong_operation": 11,
+        "scale_unit": 3,
+        "hallucinated_constant": 1,
+        "wrong_cell": 2,
+        "sign_error": 2,
+        "multi_step_order": 1
+      }
+    },
+    {
+      "stage": "L1",
+      "effort": "low",
+      "accuracy": 0.15,
+      "dev_accuracy": 0.6667,
+      "monitor_accuracy": 0.0,
+      "top_error": "scale_unit",
+      "patch": "R1",
+      "accepted": true,
+      "delta": 0.15,
+      "n_fixed": 3,
+      "n_regressions": 0,
+      "chosen_rank": 2,
+      "dev_delta": 0.0334,
+      "n_attempts": 2,
+      "attempts": [
+        {
+          "rank": 1,
+          "error_class": "wrong_operation",
+          "accepted": false,
+          "tune_delta": 0.1,
+          "n_fixed": 2,
+          "n_regressions": 0,
+          "dev_prev": 0.6333,
+          "dev_cand": 0.3,
+          "dev_delta": -0.3333,
+          "rule_text": "When calculating changes over time, subtract the earlier period's value from the later period's value, then divide by the earlier value to compute percentage."
+        },
+        {
+          "rank": 2,
+          "error_class": "scale_unit",
+          "accepted": true,
+          "tune_delta": 0.15,
+          "n_fixed": 3,
+          "n_regressions": 0,
+          "dev_prev": 0.6333,
+          "dev_cand": 0.6667,
+          "dev_delta": 0.0334,
+          "rule_text": "Always divide percentage values by 100 to express final performance results as standard decimal proportions rather than whole percentage numbers."
+        }
+      ]
+    },
+    {
+      "stage": "L2",
+      "effort": "medium",
+      "accuracy": 0.2,
+      "dev_accuracy": 0.7,
+      "monitor_accuracy": 0.15,
+      "top_error": "sign_error",
+      "patch": "R2",
+      "accepted": true,
+      "delta": 0.05,
+      "n_fixed": 1,
+      "n_regressions": 0,
+      "chosen_rank": 3,
+      "dev_delta": 0.0333,
+      "n_attempts": 3,
+      "attempts": [
+        {
+          "rank": 1,
+          "error_class": "hallucinated_constant",
+          "stage": "tune",
+          "accepted": false,
+          "tune_delta": 0.0,
+          "n_regressions": 1,
+          "rule_text": "Extract and use all explicit numerical values stated in the prompt context rather than substituting missing values with arbitrary or default constants."
+        },
+        {
+          "rank": 2,
+          "error_class": "wrong_operation",
+          "stage": "tune",
+          "accepted": false,
+          "tune_delta": 0.0,
+          "n_regressions": 1,
+          "rule_text": "When calculating observed decrease or change between periods, compute the percentage change using (later - earlier) / earlier * 100 rather than simple subtraction."
+        },
+        {
+          "rank": 3,
+          "error_class": "sign_error",
+          "accepted": true,
+          "tune_delta": 0.05,
+          "n_fixed": 1,
+          "n_regressions": 0,
+          "dev_prev": 0.6667,
+          "dev_cand": 0.7,
+          "dev_delta": 0.0333,
+          "rule_text": "Subtract reference, cost, or initial values from current or final values to ensure net losses and negative changes retain a negative sign."
+        }
+      ]
+    },
+    {
+      "stage": "L3",
+      "effort": "high",
+      "accuracy": 0.25,
+      "dev_accuracy": 0.7,
+      "monitor_accuracy": 0.15,
+      "top_error": "hallucinated_constant",
+      "patch": "R3",
+      "accepted": true,
+      "delta": 0.1,
+      "n_fixed": 2,
+      "n_regressions": 0,
+      "chosen_rank": 1,
+      "dev_delta": 0.0333,
+      "n_attempts": 1,
+      "attempts": [
+        {
+          "rank": 1,
+          "error_class": "hallucinated_constant",
+          "accepted": true,
+          "tune_delta": 0.1,
+          "n_fixed": 2,
+          "n_regressions": 0,
+          "dev_prev": 0.6667,
+          "dev_cand": 0.7,
+          "dev_delta": 0.0333,
+          "rule_text": "Extract all numerical operands directly from the provided context or question rather than introducing arbitrary default constants."
+        }
+      ]
+    }
+  ],
+  "tune_final_accuracy": 0.25,
+  "dtest_baseline": {
+    "n": 50,
+    "execution_accuracy": 0.74,
+    "program_accuracy": 0.2,
+    "n_correct": 37,
+    "per_cell": {
+      "table/1_step": {
+        "n": 9,
+        "correct": 8,
+        "acc": 0.8888888888888888
+      },
+      "table/2_step": {
+        "n": 9,
+        "correct": 6,
+        "acc": 0.6666666666666666
+      },
+      "table/3plus_step": {
+        "n": 8,
+        "correct": 5,
+        "acc": 0.625
+      },
+      "text/1_step": {
+        "n": 8,
+        "correct": 6,
+        "acc": 0.75
+      },
+      "text/2_step": {
+        "n": 8,
+        "correct": 7,
+        "acc": 0.875
+      },
+      "text/3plus_step": {
+        "n": 8,
+        "correct": 5,
+        "acc": 0.625
+      }
+    },
+    "error_classes": {
+      "scale_unit": 7,
+      "wrong_operation": 4,
+      "hallucinated_constant": 1,
+      "wrong_cell": 1
+    },
+    "thought_tokens_total": 18996
+  },
+  "dtest_final": {
+    "n": 50,
+    "execution_accuracy": 0.76,
+    "program_accuracy": 0.42,
+    "n_correct": 38,
+    "per_cell": {
+      "table/1_step": {
+        "n": 9,
+        "correct": 8,
+        "acc": 0.8888888888888888
+      },
+      "table/2_step": {
+        "n": 9,
+        "correct": 6,
+        "acc": 0.6666666666666666
+      },
+      "table/3plus_step": {
+        "n": 8,
+        "correct": 5,
+        "acc": 0.625
+      },
+      "text/1_step": {
+        "n": 8,
+        "correct": 6,
+        "acc": 0.75
+      },
+      "text/2_step": {
+        "n": 8,
+        "correct": 7,
+        "acc": 0.875
+      },
+      "text/3plus_step": {
+        "n": 8,
+        "correct": 6,
+        "acc": 0.75
+      }
+    },
+    "error_classes": {
+      "scale_unit": 6,
+      "wrong_operation": 4,
+      "hallucinated_constant": 2
+    },
+    "thought_tokens_total": 104745
+  },
+  "dtest_error_reduction": {
+    "scale_unit": {
+      "baseline": 7,
+      "final": 6
+    },
+    "wrong_cell": {
+      "baseline": 1,
+      "final": 0
+    },
+    "wrong_operation": {
+      "baseline": 4,
+      "final": 4
+    },
+    "sign_error": {
+      "baseline": 0,
+      "final": 0
+    },
+    "multi_step_order": {
+      "baseline": 0,
+      "final": 0
+    },
+    "hallucinated_constant": {
+      "baseline": 1,
+      "final": 2
+    },
+    "format_error": {
+      "baseline": 0,
+      "final": 0
+    }
+  },
+  "audit": [
+    {
+      "loop": 1,
+      "effort": "low",
+      "top_error_class": "scale_unit",
+      "error_counts": {
+        "wrong_operation": 11,
+        "scale_unit": 3,
+        "hallucinated_constant": 1,
+        "wrong_cell": 2,
+        "sign_error": 2,
+        "multi_step_order": 1
+      },
+      "patch_rule_id": "R1",
+      "rule_text": "Always divide percentage values by 100 to express final performance results as standard decimal proportions rather than whole percentage numbers.",
+      "exemplar_id": "E1",
+      "source_failure_id": "APTV/2018/page_36.pdf-2",
+      "monitor_accuracy": 0.0,
+      "candidate_accuracy": 0.15,
+      "delta_accuracy": 0.15,
+      "n_fixed": 3,
+      "n_regressions": 0,
+      "compliance_ok": true,
+      "blocked_reason": "",
+      "dev_prev_acc": 0.6333,
+      "dev_cand_acc": 0.6667,
+      "dev_delta": 0.0334,
+      "chosen_rank": 2,
+      "decision": "ACCEPT",
+      "n_attempts": 2,
+      "attempts": [
+        {
+          "rank": 1,
+          "error_class": "wrong_operation",
+          "accepted": false,
+          "tune_delta": 0.1,
+          "n_fixed": 2,
+          "n_regressions": 0,
+          "dev_prev": 0.6333,
+          "dev_cand": 0.3,
+          "dev_delta": -0.3333,
+          "rule_text": "When calculating changes over time, subtract the earlier period's value from the later period's value, then divide by the earlier value to compute percentage."
+        },
+        {
+          "rank": 2,
+          "error_class": "scale_unit",
+          "accepted": true,
+          "tune_delta": 0.15,
+          "n_fixed": 3,
+          "n_regressions": 0,
+          "dev_prev": 0.6333,
+          "dev_cand": 0.6667,
+          "dev_delta": 0.0334,
+          "rule_text": "Always divide percentage values by 100 to express final performance results as standard decimal proportions rather than whole percentage numbers."
+        }
+      ],
+      "reason": "ACCEPT: Δacc=+0.150 tune (fixed=3, regr=0); dev 0.633->0.667 (Δ+0.033) OK; compliant"
+    },
+    {
+      "loop": 2,
+      "effort": "medium",
+      "top_error_class": "sign_error",
+      "error_counts": {
+        "wrong_operation": 5,
+        "hallucinated_constant": 8,
+        "scale_unit": 1,
+        "sign_error": 2,
+        "multi_step_order": 1
+      },
+      "patch_rule_id": "R2",
+      "rule_text": "Subtract reference, cost, or initial values from current or final values to ensure net losses and negative changes retain a negative sign.",
+      "exemplar_id": "E2",
+      "source_failure_id": "ABMD/2003/page_22.pdf-1",
+      "monitor_accuracy": 0.15,
+      "candidate_accuracy": 0.2,
+      "delta_accuracy": 0.05,
+      "n_fixed": 1,
+      "n_regressions": 0,
+      "compliance_ok": true,
+      "blocked_reason": "",
+      "dev_prev_acc": 0.6667,
+      "dev_cand_acc": 0.7,
+      "dev_delta": 0.0333,
+      "chosen_rank": 3,
+      "decision": "ACCEPT",
+      "n_attempts": 3,
+      "attempts": [
+        {
+          "rank": 1,
+          "error_class": "hallucinated_constant",
+          "stage": "tune",
+          "accepted": false,
+          "tune_delta": 0.0,
+          "n_regressions": 1,
+          "rule_text": "Extract and use all explicit numerical values stated in the prompt context rather than substituting missing values with arbitrary or default constants."
+        },
+        {
+          "rank": 2,
+          "error_class": "wrong_operation",
+          "stage": "tune",
+          "accepted": false,
+          "tune_delta": 0.0,
+          "n_regressions": 1,
+          "rule_text": "When calculating observed decrease or change between periods, compute the percentage change using (later - earlier) / earlier * 100 rather than simple subtraction."
+        },
+        {
+          "rank": 3,
+          "error_class": "sign_error",
+          "accepted": true,
+          "tune_delta": 0.05,
+          "n_fixed": 1,
+          "n_regressions": 0,
+          "dev_prev": 0.6667,
+          "dev_cand": 0.7,
+          "dev_delta": 0.0333,
+          "rule_text": "Subtract reference, cost, or initial values from current or final values to ensure net losses and negative changes retain a negative sign."
+        }
+      ],
+      "reason": "ACCEPT: Δacc=+0.050 tune (fixed=1, regr=0); dev 0.667->0.700 (Δ+0.033) OK; compliant"
+    },
+    {
+      "loop": 3,
+      "effort": "high",
+      "top_error_class": "hallucinated_constant",
+      "error_counts": {
+        "wrong_operation": 5,
+        "hallucinated_constant": 10,
+        "sign_error": 1,
+        "multi_step_order": 1
+      },
+      "patch_rule_id": "R3",
+      "rule_text": "Extract all numerical operands directly from the provided context or question rather than introducing arbitrary default constants.",
+      "exemplar_id": "E3",
+      "source_failure_id": "CE/2017/page_37.pdf-2",
+      "monitor_accuracy": 0.15,
+      "candidate_accuracy": 0.25,
+      "delta_accuracy": 0.1,
+      "n_fixed": 2,
+      "n_regressions": 0,
+      "compliance_ok": true,
+      "blocked_reason": "",
+      "dev_prev_acc": 0.6667,
+      "dev_cand_acc": 0.7,
+      "dev_delta": 0.0333,
+      "chosen_rank": 1,
+      "decision": "ACCEPT",
+      "n_attempts": 1,
+      "attempts": [
+        {
+          "rank": 1,
+          "error_class": "hallucinated_constant",
+          "accepted": true,
+          "tune_delta": 0.1,
+          "n_fixed": 2,
+          "n_regressions": 0,
+          "dev_prev": 0.6667,
+          "dev_cand": 0.7,
+          "dev_delta": 0.0333,
+          "rule_text": "Extract all numerical operands directly from the provided context or question rather than introducing arbitrary default constants."
+        }
+      ],
+      "reason": "ACCEPT: Δacc=+0.100 tune (fixed=2, regr=0); dev 0.667->0.700 (Δ+0.033) OK; compliant"
+    }
+  ]
+}

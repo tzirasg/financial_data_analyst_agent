@@ -1,0 +1,20 @@
+[
+  {
+    "id": "R1",
+    "error_class": "scale_unit",
+    "rule_text": "Always divide percentage values by 100 to express final performance results as standard decimal proportions rather than whole percentage numbers.",
+    "added_loop": 1
+  },
+  {
+    "id": "R2",
+    "error_class": "sign_error",
+    "rule_text": "Subtract reference, cost, or initial values from current or final values to ensure net losses and negative changes retain a negative sign.",
+    "added_loop": 2
+  },
+  {
+    "id": "R3",
+    "error_class": "hallucinated_constant",
+    "rule_text": "Extract all numerical operands directly from the provided context or question rather than introducing arbitrary default constants.",
+    "added_loop": 3
+  }
+]

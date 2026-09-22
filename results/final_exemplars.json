@@ -1,0 +1,29 @@
+[
+  {
+    "id": "E1",
+    "error_class": "scale_unit",
+    "question": "what is the difference in percentage performance for aptiv plc versus the automotive peer group for the five year period ending december 31 2018?",
+    "correct_program": "subtract(130.80, const_100), subtract(106.89, const_100), divide(#0, const_100), divide(#1, const_100), subtract(#2, #3)",
+    "correct_answer": 0.2391,
+    "note": "Earlier the model answered 23.91 (type: scale_unit); the correct result is 0.2391.",
+    "added_loop": 1
+  },
+  {
+    "id": "E2",
+    "error_class": "sign_error",
+    "question": "what was the unrealized loss in marketable securities at march 31 , 2003?",
+    "correct_program": "subtract(9858000, 9877000)",
+    "correct_answer": -19000.0,
+    "note": "Earlier the model answered 19000.0 (type: sign_error); the correct result is -19000.0.",
+    "added_loop": 2
+  },
+  {
+    "id": "E3",
+    "error_class": "hallucinated_constant",
+    "question": "what is the total authorized the aggregate repurchase of common stock since february 2008 including the additional amount authorized in 2017 in billions",
+    "correct_program": "add(3.9, 1.5)",
+    "correct_answer": 5.4,
+    "note": "Earlier the model answered 3.9 (type: hallucinated_constant); the correct result is 5.4.",
+    "added_loop": 3
+  }
+]
